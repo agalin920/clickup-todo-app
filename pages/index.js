@@ -21,10 +21,8 @@ export default function Home() {
     if(!code) {
       window.open(`https://app.clickup.com/api?client_id=${clientId}&redirect_uri=https://clickup-todo-app.vercel.app/`, "_self");
     } else {
-      const token = await fetch(`https://app.clickup.com/api/v2/oauth/token/?client_id=${clientId}&client_secret=${clientSecret}&code=${code}`, {
-        method: 'POST',
-      });
-    console.log('test token', token);
+      const token = axios.post(`https://app.clickup.com/api/v2/oauth/token/?client_id=${clientId}&client_secret=${clientSecret}&code=${code}`);
+      console.log('test token', token);
       // const data = await axios.get('https://api.clickuppp.com/api/v2/folder/38093451/list?archived=false', {
       //   headers: {
       //     Authorization: 'pk_14719907_QWTOCXX58D8GS9PNE4QAYZ4LIRKWQPE9'
