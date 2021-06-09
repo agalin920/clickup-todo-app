@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Head from 'next/head'
 import {useRouter} from 'next/router'
 import {useState, useEffect} from 'react';
@@ -11,27 +12,27 @@ export default function Home() {
   const router = useRouter();
 
   const headers = new Headers();
-  headers.set('Authorization', 'pk_14719907_QWTOCXX58D8GS9PNE4QAYZ4LIRKWQPE9');
+  headers.append('Authorization', 'pk_14719907_QWTOCXX58D8GS9PNE4QAYZ4LIRKWQPE9');
 
   useEffect(async () => {
-    // if(!router.isReady) return;
-    // const {code} = router.query;
-    // console.log(router.query);
-    // if(!code) {
-    //   window.open(`https://app.clickup.com/api?client_id=${clientId}&redirect_uri=http://localhost:3000`, "_self");
-    // } else {
-    //   const token = await fetch(`https://app.clickup.com/api/v2/oauth/token/?client_id=${clientId}&client_secret=${clientSecret}&code=${code}`, {
-    //     method: 'POST',
-    //   });
-    //   console.log('test token', token);
-      const data = await fetch('https://api.clickup.com/api/v2/folder/38093451/list?archived=false', {
-        method: 'GET',
-        headers,
-      })
-
-      console.log('data', data);
+    if(!router.isReady) return;
+    const {code} = router.query;
+    console.log(router.query);
+    if(!code) {
+      window.open(`https://app.clickup.com/api?client_id=${clientId}&redirect_uri=https://clickup-todo-app.vercel.app/`, "_self");
+    } else {
+      const token = await fetch(`https://app.clickup.com/api/v2/oauth/token/?client_id=${clientId}&client_secret=${clientSecret}&code=${code}`, {
+        method: 'POST',
+      });
+    console.log('test token', token);
+      // const data = await axios.get('https://api.clickuppp.com/api/v2/folder/38093451/list?archived=false', {
+      //   headers: {
+      //     Authorization: 'pk_14719907_QWTOCXX58D8GS9PNE4QAYZ4LIRKWQPE9'
+      //   }
+      // })
+    }
     
-  }, []);
+  }, [router.isReady]);
 
   return (
     <div className={styles.container}>
